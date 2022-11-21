@@ -26,7 +26,7 @@ const Foods = (props) => {
                 list item among its siblings. Most often you would use IDs
                 from your data as keys.
               */
-              <li className="liFoods" key="item.id">
+              <li className="liFoods" key={item.id}>
                 <img
                   className="foodImg"
                   src={require(`./images/${item.image}`)}

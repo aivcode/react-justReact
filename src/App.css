@@ -6,7 +6,7 @@
   position: absolute;
   background: rgb(22, 61, 97);
   left: 50%;
-  height: 630px;
+  height: 1000px;
   width: 40%;
   transform: translate(-50%, 0%);
   text-align: center;
@@ -44,6 +44,6 @@
   border-radius: 8px;
   border: none;
   color: #fff;
-  border-color: #367AF6;
+  background-color: #367AF6;
   cursor: pointer;
 }
