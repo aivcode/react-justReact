@@ -3,6 +3,8 @@ import Foods from "./Foods";
 import "./App.css";
 
 
+export const foodItemsContext = React.createContext();
+
 const App = () => {
   const [menuItems, setMenuItems] = useState([
     {
@@ -42,36 +44,44 @@ const App = () => {
 
 
   return (
-    <div className="App">
+    /*
+      This tag means that our parent div element, including its children, is
+      now included inside of the preceding tag. In this context provider, we
+      put the value as menuItems. Therefore, the menuItems object is now 
+      provided in this context.
+    */
+    <foodItemsContext.Provider value={menuItems}>
+      <div className="App">
 
-      <button className="toggleButton" onClick={() => setIsChooseFoodPage
-      (!isChooseFoodPage)}>
-        {isChooseFoodPage ? "Availability Check" : "Order Food"}
-      </button>
+        <button className="toggleButton" onClick={() => setIsChooseFoodPage
+        (!isChooseFoodPage)}>
+          {isChooseFoodPage ? "Availability Check" : "Order Food"}
+        </button>
 
-      <h3 className="title">Just Food Online Shop</h3>
-      {!isChooseFoodPage && 
-        <>
-          <h4 className="subTitle">Menu Availability</h4>
-          <ul className="ulApp">
-            {
-              menuItems.map((item) => {
-                return (
-                  <li key={item.id} className="liApp">
-                    {item.name} - {item.quantity}
-                  </li>
-                );
-              })
-            }
-          </ul>
-        </>
-      }
-      {isChooseFoodPage && 
-        <Foods
-          foodItems={menuItems}
-        >
-        </Foods>}
-    </div>
+        <h3 className="title">Just Food Online Shop</h3>
+        {!isChooseFoodPage && 
+          <>
+            <h4 className="subTitle">Menu Availability</h4>
+            <ul className="ulApp">
+              {
+                menuItems.map((item) => {
+                  return (
+                    <li key={item.id} className="liApp">
+                      {item.name} - {item.quantity}
+                    </li>
+                  );
+                })
+              }
+            </ul>
+          </>
+        }
+        {isChooseFoodPage && 
+          <Foods
+            foodItems={menuItems}
+          >
+          </Foods>}
+      </div>
+    </foodItemsContext.Provider>
   );
 };
 
