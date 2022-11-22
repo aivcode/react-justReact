@@ -39,6 +39,18 @@ const App = () => {
     },
   ]);
   const [isChooseFoodPage, setIsChooseFoodPage] = useState(false);
+  const updateMenuItemQuantity = (id, orderQuantity) => {
+    const updateMenuItems = menuItems.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          quantity: item.quantity - orderQuantity,
+        };
+      }
+      return item;
+    });
+    setMenuItems(updateMenuItems);
+  };
 
   return (
     <div className="App">
@@ -65,9 +77,15 @@ const App = () => {
           </ul>
         </>
       }
-      {isChooseFoodPage && <Foods foodItems={menuItems}></Foods>}
+      {isChooseFoodPage && 
+        <Foods
+          foodItems={menuItems}
+          updateQuantity={updateMenuItemQuantity}
+        >
+        </Foods>}
     </div>
   );
 };
+
 
 export default App;
