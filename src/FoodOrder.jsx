@@ -15,7 +15,6 @@ const FoodOrder = (props) => {
 
   const handleClick = () => {
     setIsOrdered(true);
-    props.updateQuantity(selectedFood.id, quantity);
   };
 
   return (

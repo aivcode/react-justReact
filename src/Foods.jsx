@@ -66,7 +66,6 @@ const Foods = (props) => {
         <FoodOrder
           food={selectedFood}
           returnToMenu={() => setSelectedFood("")}
-          updateQuantity={(id, quantity) => props.updateQuantity(id, quantity)}
         />
       )}
     </Fragment>
