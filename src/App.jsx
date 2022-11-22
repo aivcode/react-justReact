@@ -65,9 +65,7 @@ const App = () => {
           </ul>
         </>
       }
-      {isChooseFoodPage && 
-        <Foods foodItems={menuItems}>
-        </Foods>}
+      {isChooseFoodPage && <Foods foodItems={menuItems}></Foods>}
     </div>
   );
 };
