@@ -56,7 +56,7 @@ const FoodOrder = (props) => {
                 className="quantity"
                 min="1"
                 max="10"
-                onChange={handleQuantityChange()}
+                onChange={handleQuantityChange}
               />
             </li>
             <li className="liDetails">
