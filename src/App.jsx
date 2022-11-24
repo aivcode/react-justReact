@@ -1,9 +1,22 @@
 import React, {Fragment, useState} from "react";
+import styled from "styled-components";
 import Foods from "./Foods";
 import "./App.css";
 
 
 export const foodItemsContext = React.createContext();
+
+const StyledToggleButton = styled.button`
+  float: left;
+  margin: 5px 0px 0px 3px;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: none;
+  color: #fff;
+  background-color: #367af6;
+  cursor: pointer;
+`;
 
 const App = () => {
   const [menuItems, setMenuItems] = useState([
@@ -53,10 +66,18 @@ const App = () => {
     <foodItemsContext.Provider value={menuItems}>
       <div className="App">
 
-        <button className="toggleButton" onClick={() => setIsChooseFoodPage
+        {/* <button className="toggleButton" onClick={() => setIsChooseFoodPage
         (!isChooseFoodPage)}>
           {isChooseFoodPage ? "Availability Check" : "Order Food"}
-        </button>
+        </button> */}
+
+        {/* styled component example */}
+        <StyledToggleButton
+          onClick={() => setIsChooseFoodPage(!isChooseFoodPage)}
+        >
+          {isChooseFoodPage ? "Availability Check" : "Order Food"}
+        </StyledToggleButton>
+
 
         <h3 className="title">Just Food Online Shop</h3>
         {!isChooseFoodPage && 
