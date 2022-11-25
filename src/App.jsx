@@ -1,7 +1,7 @@
 import React, {Fragment, useState} from "react";
 import styled from "styled-components";
 import Foods from "./Foods";
-import "./App.css";
+import "./App.scss";
 
 
 export const foodItemsContext = React.createContext();
@@ -66,17 +66,17 @@ const App = () => {
     <foodItemsContext.Provider value={menuItems}>
       <div className="App">
 
-        {/* <button className="toggleButton" onClick={() => setIsChooseFoodPage
+        <button className="toggleButton" onClick={() => setIsChooseFoodPage
         (!isChooseFoodPage)}>
           {isChooseFoodPage ? "Availability Check" : "Order Food"}
-        </button> */}
+        </button> 
 
-        {/* styled component example */}
-        <StyledToggleButton
+        {/* styled component example
+        {/* <StyledToggleButton
           onClick={() => setIsChooseFoodPage(!isChooseFoodPage)}
         >
           {isChooseFoodPage ? "Availability Check" : "Order Food"}
-        </StyledToggleButton>
+        </StyledToggleButton> */}
 
 
         <h3 className="title">Just Food Online Shop</h3>
