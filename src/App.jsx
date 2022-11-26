@@ -1,4 +1,5 @@
 import React, {Fragment, useState} from "react";
+import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import Foods from "./Foods";
 import appStyles from"./App.module.css";
@@ -53,6 +54,14 @@ const App = () => {
       image: "ic.jpg",
     },
   ]);
+
+  /*
+    When using the hook useMediaQuery, the isLapOrDesktop variable returns true
+    if the screen size is greater than or equal to 1224px. Likewise, isMobile
+    returns true if the screen size is less than or equal to 480px.
+  */
+  const isLapOrDeskTop = useMediaQuery({query: "(min-width: 1224px)",});
+  const isMobile = useMediaQuery({query: "(max-width: 480px)"})
   const [isChooseFoodPage, setIsChooseFoodPage] = useState(false);
 
 
