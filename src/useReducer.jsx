@@ -4,7 +4,7 @@ const fieldStyle = {
   marginTop: "20px",
   float: "left",
   width: "70%",
-  fontSize: 20,
+  fontSize: 20
 };
 
 const buttonStyle = {
@@ -16,21 +16,27 @@ const buttonStyle = {
 };
 
 const reducer = (state, action) => {
-  const {type, payload} = action;
-  return {...state, [type]: payload};
+  const { type, payload } = action;
+  return { ...state, [type]: payload };
 };
 
 const App = () => {
-  // const [state, setState] = useState("");
-  // const [city, setCity] = useState("");
-  // const [address, setAddress] = useState("");
   const addressRef = useRef();
 
-  const handleInputChange = (setInput, event) => {
-    setInput(event.target.value);
+  const initialState = {
+    fieldState: "",
+    fieldCity: "",
+    fieldAddress: ""
   };
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { fieldState, fieldCity, fieldAddress } = state;
+
   const fillAddress = () => {
-    setAddress(`${city}, ${state}`);
+    dispatch({
+      type: "fieldAddress",
+      payload: `${fieldCity}, ${fieldState}`
+    });
     addressRef.current.focus();
   };
 
@@ -39,24 +45,39 @@ const App = () => {
       <input
         placeholder="State"
         autoFocus
-        value={state}
+        value={fieldState}
         style={fieldStyle}
-        onChange={(e) => handleInputChange(setState, e)}
+        onChange={(e) =>
+          dispatch({
+            type: "fieldState",
+            payload: e.target.value
+          })
+        }
       />
       <input
         placeholder="City"
-        value={city}
+        value={fieldCity}
         style={fieldStyle}
-        onChange={(e) => handleInputChange(setCity, e)}
+        onChange={(e) =>
+          dispatch({
+            type: "fieldCity",
+            payload: e.target.value
+          })
+        }
       />
       <button style={buttonStyle} onClick={fillAddress}>
-        Fill Adress
+        Fill Address
       </button>
       <textarea
-        value={address}
+        value={fieldAddress}
         placeholder="Address"
         style={fieldStyle}
-        onChange={(e) => handleInputChange(setAddress, e)}
+        onChange={(e) =>
+          dispatch({
+            type: "fieldAddress",
+            payload: e.target.value
+          })
+        }
         ref={addressRef}
       />
     </div>
