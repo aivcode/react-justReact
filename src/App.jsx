@@ -1,11 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
+import Combinations from "./memorization/Combinations";
+import Shelf from "./memorization/Shelf";
+
+const fieldStyle = {
+  marginTop: "20px",
+  float: "left",
+  width: "75%",
+  fontSize: 20,
+};
 
 const App = () => {
+  const [bookCount, setBookCount] = useState("");
+  const [shelfName, setShelfName] = useState("");
+
+  const handleShelfChange = (e) => {
+    setShelfName(e.target.value);
+  };
+  const handleBookChange = (e) => {
+    setBookCount(e.target.value);
+  };
+
   return (
-    <>
-      <h1>PLACEHOLDER</h1>
-    </>
-  )
-}
+    <div width="100%">
+      <input
+        placeholder="Shelf Name"
+        style={fieldStyle}
+        value={shelfName}
+        onChange={handleShelfChange}
+      />
+      <label style={fieldStyle}>
+        <Shelf shelfName={shelfName} />
+      </label>
+
+      <input
+        placeholder="How many books?"
+        style={fieldStyle}
+        value={bookCount}
+        onChange={handleBookChange}
+      />
+      <label style={fieldStyle}>
+        {bookCount > 0 && <Combinations countBooks={bookCount} />}
+      </label>
+    </div>
+  );
+};
 
 export default App;
