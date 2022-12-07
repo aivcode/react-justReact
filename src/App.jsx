@@ -11,6 +11,7 @@ const fieldStyle = {
 
 const App = () => {
   // Comment for test commit with new repo title
+  // $ git remote set-url origin NEW_URL
   const [bookCount, setBookCount] = useState("");
   const [shelfName, setShelfName] = useState("");
 
