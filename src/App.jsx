@@ -39,7 +39,9 @@ const App = () => {
         onChange={handleBookChange}
       />
       <label style={fieldStyle}>
-        {bookCount > 0 && <Combinations countBooks={bookCount} />}
+        {bookCount > 0 && (
+          <Combinations countBooks={bookCount} shelfName={shelfName} />
+        )}
       </label>
     </div>
   );
