@@ -1,3 +1,12 @@
+/*
+  As you can see from the preceding examples, React.memo is for memorizing a
+  component. The useMemo Hook is used to memorize values, and useCallback is
+  used to memorize functions. Using these techniques when you start developing
+  an application is not recommended. Once you have developed the application or
+  a large section of it, use Profiler to check for performance leaks. Next,
+  identify the cause and use these techniques to fix it.
+*/
+
 import React, { useState, useCallback } from "react";
 import Combinations from "./memorization/Combinations";
 import Shelf from "./memorization/Shelf";
