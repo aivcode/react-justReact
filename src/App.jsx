@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Combinations from "./memorization/Combinations";
 import Shelf from "./memorization/Shelf";
 
@@ -14,6 +14,21 @@ const App = () => {
   // $ git remote set-url origin NEW_URL
   const [bookCount, setBookCount] = useState("");
   const [shelfName, setShelfName] = useState("");
+  const [shelfSpace, setShelfSpace] = useState("");
+
+  /*
+    Here, the Hook useCallback memorizes the function handleClick. So React.
+    memo does not see any changes in the prop checkSpace, preventing the 
+    Combinations component from re-rendering. Even if you click the Check Space
+    button, the component will not re-render given that there is no change to
+    the countBooks and handleClick(), which are the props passed. If you change
+    the book count, the component re-renders because of the change in the first
+    prop. This way, the useCallback Hook memorizes a function call between
+    renders and avoids re-renders due to the function equality behavior.
+  */
+  const handleClick = useCallback((theSpace) => {
+    setShelfSpace(theSpace);
+  }, []);
 
   const handleShelfChange = (e) => {
     setShelfName(e.target.value);
@@ -42,7 +57,10 @@ const App = () => {
       />
       <label style={fieldStyle}>
         {bookCount > 0 && (
-          <Combinations countBooks={bookCount} shelfName={shelfName} />
+          <Combinations countBooks={bookCount} checkSpace={handleClick} />
+        )}
+        {shelfSpace && (
+          <p style={fieldStyle}>The space at the shelf is - {shelfSpace}</p>
         )}
       </label>
     </div>

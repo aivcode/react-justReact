@@ -5,8 +5,22 @@ import React, { useMemo } from "react";
   the whole component, so it only re-renders when the props change, in this 
   case countBooks. 
 */
-const Combinations = React.memo(({ countBooks, shelfName }) => {
+const Combinations = React.memo(({ countBooks, checkSpace }) => {
   console.log("Combinations component is re-rendered");
+  let space = "";
+  switch (countBooks) {
+    case 1 - 5:
+      space = "Free space available";
+      break;
+    case 5 - 10:
+      space = "Perfect";
+      break;
+    case 10 - 15:
+      space = "Need extra storage";
+      break;
+    // default:
+    //   space = "Not sufficient";
+  }
 
   /*
     The useMemo() returns the memorized output if there is no change in the
@@ -18,14 +32,19 @@ const Combinations = React.memo(({ countBooks, shelfName }) => {
   let arrangements = useMemo(() => {
     console.log("Total number of ways being calculated");
     let arrs = 1;
+
     for (let i = 2; i <= countBooks; i++) {
       arrs *= i;
     }
     return arrs;
   }, [countBooks]);
 
-  return `The total number of ways you can arrange the books on the shelf 
-    ${shelfName} is: ${arrangements}`;
+  return (
+    <>
+      <p>The total number of ways you can arrange books is {arrangements}</p>
+      <button onClick={() => checkSpace(space)}>Check Space</button>
+    </>
+  );
 });
 
 export default Combinations;
