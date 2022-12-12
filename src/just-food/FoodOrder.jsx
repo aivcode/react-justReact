@@ -1,8 +1,7 @@
-import React, {Fragment, useContext, useState} from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { foodItemsContext } from "../App";
 import ErrorFunctionalBoundary from "./ErrorFunctionalBoundary";
 import "./FoodOrder.css";
-
 
 const FoodOrder = (props) => {
   const selectedFood = props.food;
@@ -28,7 +27,7 @@ const FoodOrder = (props) => {
       if (item.id === selectedFood.id) {
         item.quantity = item.quantity - quantity;
       }
-    })
+    });
   };
 
   return (
@@ -84,14 +83,18 @@ const FoodOrder = (props) => {
               <button className="btn btnOrder" onClick={handleClick}>
                 Submit Order
               </button>
-              <button className="btn btnReturnMenu" onClick={props.returnToMenu}>
+              <button
+                className="btn btnReturnMenu"
+                onClick={props.returnToMenu}
+              >
                 Return to Menu
               </button>
             </li>
             {isOrdered && (
               <li className="liMessage">
                 <label>
-                  Order Submitted! You will receive an SMS to once ready for pickup.
+                  Order Submitted! You will receive an SMS to once ready for
+                  pickup.
                 </label>
               </li>
             )}
@@ -102,6 +105,5 @@ const FoodOrder = (props) => {
     </>
   );
 };
-
 
 export default FoodOrder;

@@ -1,22 +1,21 @@
-import React, {Fragment, useState} from "react";
-import styled from "styled-components";
+import React, { Fragment, useState } from "react";
+// import styled from "styled-components";
 import Foods from "./just-food/Foods";
-import appStyles from"./just-food/App.module.css";
-
+import appStyles from "./just-food/App.module.css";
 
 export const foodItemsContext = React.createContext();
 
-const StyledToggleButton = styled.button`
-  float: left;
-  margin: 5px 0px 0px 3px;
-  align-items: center;
-  padding: 6px 14px;
-  border-radius: 8px;
-  border: none;
-  color: #fff;
-  background-color: #367af6;
-  cursor: pointer;
-`;
+// const StyledToggleButton = styled.button`
+//   float: left;
+//   margin: 5px 0px 0px 3px;
+//   align-items: center;
+//   padding: 6px 14px;
+//   border-radius: 8px;
+//   border: none;
+//   color: #fff;
+//   background-color: #367af6;
+//   cursor: pointer;
+// `;
 
 const App = () => {
   const [menuItems, setMenuItems] = useState([
@@ -61,7 +60,6 @@ const App = () => {
   */
   const [isChooseFoodPage, setIsChooseFoodPage] = useState(false);
 
-
   return (
     /*
       This tag means that our parent div element, including its children, is
@@ -71,11 +69,12 @@ const App = () => {
     */
     <foodItemsContext.Provider value={menuItems}>
       <div className={appStyles.App}>
-
-        <button className={appStyles.toggleButton} onClick={() => setIsChooseFoodPage
-        (!isChooseFoodPage)}>
+        <button
+          className={appStyles.toggleButton}
+          onClick={() => setIsChooseFoodPage(!isChooseFoodPage)}
+        >
           {isChooseFoodPage ? "Availability Check" : "Order Food"}
-        </button> 
+        </button>
 
         {/* styled component example
         {/* <StyledToggleButton
@@ -84,33 +83,25 @@ const App = () => {
           {isChooseFoodPage ? "Availability Check" : "Order Food"}
         </StyledToggleButton> */}
 
-
         <h3 className={appStyles.title}>Just Food Online Shop</h3>
-        {!isChooseFoodPage && 
+        {!isChooseFoodPage && (
           <>
             <h4 className={appStyles.subTitle}>Menu Availability</h4>
             <ul className={appStyles.ulApp}>
-              {
-                menuItems.map((item) => {
-                  return (
-                    <li key={item.id} className={appStyles.liApp}>
-                      {item.name} - {item.quantity}
-                    </li>
-                  );
-                })
-              }
+              {menuItems.map((item) => {
+                return (
+                  <li key={item.id} className={appStyles.liApp}>
+                    {item.name} - {item.quantity}
+                  </li>
+                );
+              })}
             </ul>
           </>
-        }
-        {isChooseFoodPage && 
-          <Foods
-            foodItems={menuItems}
-          >
-          </Foods>}
+        )}
+        {isChooseFoodPage && <Foods foodItems={menuItems}></Foods>}
       </div>
     </foodItemsContext.Provider>
   );
 };
-
 
 export default App;
