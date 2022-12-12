@@ -18,7 +18,7 @@ const fieldStyle = {
   fontSize: 20,
 };
 
-const App = () => {
+const Memo = () => {
   // Comment for test commit with new repo title
   // $ git remote set-url origin NEW_URL
   const [bookCount, setBookCount] = useState("");
@@ -76,4 +76,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Memo;

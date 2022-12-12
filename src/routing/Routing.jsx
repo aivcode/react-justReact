@@ -14,7 +14,7 @@ const liStyle = {
   paddingLeft: "20px",
 };
 
-export default function App() {
+export default function Routing() {
   return (
     <BrowserRouter>
       <ul style={ulStyle}>

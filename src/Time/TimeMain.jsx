@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Time from "./Time";
 
 
-const App = (props) => {
+const TimeMain = (props) => {
   /*
      The useState Hook updated the variable’s state,
      which caused the component to re-render. 
@@ -24,7 +24,7 @@ const App = (props) => {
     </div>
   );
 };
-export default App;
+export default TimeMain;
 
 // export default class App extends React.Component {
 //   constructor(props) {
