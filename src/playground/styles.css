@@ -1,0 +1,14 @@
+.title {
+  color: red;
+  margin-left: 20px;
+  text-align: center;
+}
+
+.btnTest {
+  margin-left: 1200px;
+  background-color: rgb(77, 154, 77);
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
