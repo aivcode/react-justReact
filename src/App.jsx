@@ -1,79 +1,116 @@
-/*
-  As you can see from the preceding examples, React.memo is for memorizing a
-  component. The useMemo Hook is used to memorize values, and useCallback is
-  used to memorize functions. Using these techniques when you start developing
-  an application is not recommended. Once you have developed the application or
-  a large section of it, use Profiler to check for performance leaks. Next,
-  identify the cause and use these techniques to fix it.
-*/
+import React, {Fragment, useState} from "react";
+import styled from "styled-components";
+import Foods from "./just-food/Foods";
+import appStyles from"./just-food/App.module.css";
 
-import React, { useState, useCallback } from "react";
-import Combinations from "./memorization/Combinations";
-import Shelf from "./memorization/Shelf";
 
-const fieldStyle = {
-  marginTop: "20px",
-  float: "left",
-  width: "75%",
-  fontSize: 20,
-};
+export const foodItemsContext = React.createContext();
+
+const StyledToggleButton = styled.button`
+  float: left;
+  margin: 5px 0px 0px 3px;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: none;
+  color: #fff;
+  background-color: #367af6;
+  cursor: pointer;
+`;
 
 const App = () => {
-  // Comment for test commit with new repo title
-  // $ git remote set-url origin NEW_URL
-  const [bookCount, setBookCount] = useState("");
-  const [shelfName, setShelfName] = useState("");
-  const [shelfSpace, setShelfSpace] = useState("");
+  const [menuItems, setMenuItems] = useState([
+    {
+      id: 1,
+      name: "Chiken Burger",
+      quantity: 40,
+      desc: "Fried chicken burger - lettuce, tomato, cheese, mayonnaise",
+      price: "24",
+      image: "cb.jpg",
+    },
+    {
+      id: 2,
+      name: "Veg Burger",
+      quantity: 30,
+      desc: "Plant-based burger - lettuce, tomato, vegan cheese, mayonnaise",
+      price: "22",
+      image: "vb.jpg",
+    },
+    {
+      id: 3,
+      name: "Chips",
+      quantity: 50,
+      desc: "Potato chips fried to perfection",
+      price: "7",
+      image: "chips.jpg",
+    },
+    {
+      id: 4,
+      name: "Ice Cream",
+      quantity: 30,
+      desc: "Ice cream - Vanilla ice cream double scoop",
+      price: "4",
+      image: "ic.jpg",
+    },
+  ]);
 
   /*
-    Here, the Hook useCallback memorizes the function handleClick. So React.
-    memo does not see any changes in the prop checkSpace, preventing the 
-    Combinations component from re-rendering. Even if you click the Check Space
-    button, the component will not re-render given that there is no change to
-    the countBooks and handleClick(), which are the props passed. If you change
-    the book count, the component re-renders because of the change in the first
-    prop. This way, the useCallback Hook memorizes a function call between
-    renders and avoids re-renders due to the function equality behavior.
+    When using the hook useMediaQuery, the isLapOrDesktop variable returns true
+    if the screen size is greater than or equal to 1224px. Likewise, isMobile
+    returns true if the screen size is less than or equal to 480px.
   */
-  const handleClick = useCallback((theSpace) => {
-    setShelfSpace(theSpace);
-  }, []);
+  const [isChooseFoodPage, setIsChooseFoodPage] = useState(false);
 
-  const handleShelfChange = (e) => {
-    setShelfName(e.target.value);
-  };
-  const handleBookChange = (e) => {
-    setBookCount(e.target.value);
-  };
 
   return (
-    <div width="100%">
-      <input
-        placeholder="Shelf Name"
-        style={fieldStyle}
-        value={shelfName}
-        onChange={handleShelfChange}
-      />
-      <label style={fieldStyle}>
-        <Shelf shelfName={shelfName} />
-      </label>
+    /*
+      This tag means that our parent div element, including its children, is
+      now included inside of the preceding tag. In this context provider, we
+      put the value as menuItems. Therefore, the menuItems object is now 
+      provided in this context.
+    */
+    <foodItemsContext.Provider value={menuItems}>
+      <div className={appStyles.App}>
 
-      <input
-        placeholder="How many books?"
-        style={fieldStyle}
-        value={bookCount}
-        onChange={handleBookChange}
-      />
-      <label style={fieldStyle}>
-        {bookCount > 0 && (
-          <Combinations countBooks={bookCount} checkSpace={handleClick} />
-        )}
-        {shelfSpace && (
-          <p style={fieldStyle}>The space at the shelf is - {shelfSpace}</p>
-        )}
-      </label>
-    </div>
+        <button className={appStyles.toggleButton} onClick={() => setIsChooseFoodPage
+        (!isChooseFoodPage)}>
+          {isChooseFoodPage ? "Availability Check" : "Order Food"}
+        </button> 
+
+        {/* styled component example
+        {/* <StyledToggleButton
+          onClick={() => setIsChooseFoodPage(!isChooseFoodPage)}
+        >
+          {isChooseFoodPage ? "Availability Check" : "Order Food"}
+        </StyledToggleButton> */}
+
+
+        <h3 className={appStyles.title}>Just Food Online Shop</h3>
+        {!isChooseFoodPage && 
+          <>
+            <h4 className={appStyles.subTitle}>Menu Availability</h4>
+            <ul className={appStyles.ulApp}>
+              {
+                menuItems.map((item) => {
+                  return (
+                    <li key={item.id} className={appStyles.liApp}>
+                      {item.name} - {item.quantity}
+                    </li>
+                  );
+                })
+              }
+            </ul>
+          </>
+        }
+        {isChooseFoodPage && 
+          <Foods
+            foodItems={menuItems}
+          >
+          </Foods>}
+      </div>
+    </foodItemsContext.Provider>
   );
 };
+
 
 export default App;

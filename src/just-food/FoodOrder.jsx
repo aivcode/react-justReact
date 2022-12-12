@@ -1,5 +1,5 @@
 import React, {Fragment, useContext, useState} from "react";
-import { foodItemsContext } from "./App";
+import { foodItemsContext } from "../App";
 import ErrorFunctionalBoundary from "./ErrorFunctionalBoundary";
 import "./FoodOrder.css";
 
