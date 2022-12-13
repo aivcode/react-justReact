@@ -8,10 +8,10 @@ import TimeMain from "./time/TimeMain";
 const App = () => {
   return (
     // <EnrolmentFormMain />
-    // <JustFood />
+    <JustFood />
     // <Memo />
     // <Routing />
-    <Test />
+    // <Test />
     // <TimeMain />
   )
 }
