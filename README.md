@@ -1,4 +1,3 @@
-# Just React book by Hari Narayn
-## Just Food Project
+## Learn react with "Just React" book by Hari Narayn
 
-Single-page app with multiple views, using React Context 
+$ git remote set-url origin NEW_URL
