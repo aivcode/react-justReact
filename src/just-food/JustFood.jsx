@@ -1,23 +1,17 @@
-import React, { Fragment, useState } from "react";
-// import styled from "styled-components";
+import React, { useState, useEffect } from "react";
 import Foods from "./Foods";
 import appStyles from "./App.module.css";
+import { auth, logOut } from "./auth/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 export const foodItemsContext = React.createContext();
-
-// const StyledToggleButton = styled.button`
-//   float: left;
-//   margin: 5px 0px 0px 3px;
-//   align-items: center;
-//   padding: 6px 14px;
-//   border-radius: 8px;
-//   border: none;
-//   color: #fff;
-//   background-color: #367af6;
-//   cursor: pointer;
-// `;
-
 const JustFood = () => {
+  const navigate = useNavigate();
+  const [user, loading, error] = useAuthState(auth);
+  const [isChooseFoodPage, setIsChooseFoodPage] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
   const [menuItems, setMenuItems] = useState([
     {
       id: 1,
@@ -53,20 +47,19 @@ const JustFood = () => {
     },
   ]);
 
-  /*
-    When using the hook useMediaQuery, the isLapOrDesktop variable returns true
-    if the screen size is greater than or equal to 1224px. Likewise, isMobile
-    returns true if the screen size is less than or equal to 480px.
-  */
-  const [isChooseFoodPage, setIsChooseFoodPage] = useState(false);
+  useEffect(() => {
+    if (user) {
+      const user = auth.currentUser;
+      setUserEmail(user.email);
+      if (user.email === "admin@justfood.com") {
+        setIsAdmin(true);
+      }
+    } else {
+      navigate("/");
+    }
+  }, [user, loading]);
 
   return (
-    /*
-      This tag means that our parent div element, including its children, is
-      now included inside of the preceding tag. In this context provider, we
-      put the value as menuItems. Therefore, the menuItems object is now 
-      provided in this context.
-    */
     <foodItemsContext.Provider value={menuItems}>
       <div className={appStyles.App}>
         <button
@@ -75,13 +68,6 @@ const JustFood = () => {
         >
           {isChooseFoodPage ? "Availability Check" : "Order Food"}
         </button>
-
-        {/* styled component example
-        {/* <StyledToggleButton
-          onClick={() => setIsChooseFoodPage(!isChooseFoodPage)}
-        >
-          {isChooseFoodPage ? "Availability Check" : "Order Food"}
-        </StyledToggleButton> */}
 
         <h3 className={appStyles.title}>Just Food Online Shop</h3>
         {!isChooseFoodPage && (
