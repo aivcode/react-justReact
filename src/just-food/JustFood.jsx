@@ -62,13 +62,18 @@ const JustFood = () => {
   return (
     <foodItemsContext.Provider value={menuItems}>
       <div className={appStyles.App}>
-        <button
-          className={appStyles.toggleButton}
-          onClick={() => setIsChooseFoodPage(!isChooseFoodPage)}
-        >
-          {isChooseFoodPage ? "Availability Check" : "Order Food"}
+        <button className={appStyles.signOutButton} onClick={logOut}>
+          Sign Out
         </button>
-
+        {isAdmin && (
+          <button
+            className={appStyles.toggleButton}
+            onClick={() => setIsChooseFoodPage(!isChooseFoodPage)}
+          >
+            {isChooseFoodPage ? "Availability Check" : "Order Food"}
+          </button>
+        )}
+        <span className={appStyles.signedInMessage}>Signed as {userEmail}</span>
         <h3 className={appStyles.title}>Just Food Online Shop</h3>
         {!isChooseFoodPage && (
           <>
